@@ -12,23 +12,23 @@ import java.net.http.HttpResponse;
  */
 public class ConsumirCep {
     public static void main(String[] args) {
-        // Seu CEP personalizado conforme solicitado na atividade
-        String cep = "72450070";
-        String url = "https://viacep.com.br/ws/" + cep + "/json";
+        String cep = "72450070"; // 
+        String url = "https://viacep.com.br/ws/" + cep + "/json/";
         
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(url)) // informa end para consulta
-                    .GET() // pede os dados do site
-                    .build(); // finalizar pedido
+                    .uri(URI.create(url))
+                    .GET()
+                    .build();
                     
             HttpResponse<String> response = client.send(
                     request,
                     HttpResponse.BodyHandlers.ofString()
             );
             
-            System.out.println("Consulta realizada com sucesso para o CEP: " + cep);
+            System.out.println("Status da resposta: " + response.statusCode());
+            System.out.println("Dados do CEP:");
             System.out.println(response.body());
             
         } catch (Exception e) {
